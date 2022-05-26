@@ -21,7 +21,11 @@ export class Form extends Component {
         <div>hello, {this.state.count}</div>
         <button onClick={this.handleClick}>click</button>
         <p>Name: {this.props.name}</p>
-        <input type="text" onChange={this.handleChange} value={this.state.name}/>
+        <input
+          type="text"
+          onChange={this.handleChange}
+          value={this.state.name}
+        />
       </>
     );
   }

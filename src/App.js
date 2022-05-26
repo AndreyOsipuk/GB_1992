@@ -5,19 +5,23 @@ import { useState } from 'react';
 import style from './index.module.css';
 
 export const App = () => {
-  const [toggle, setToggle] = useState(true)
+  const [toggle, setToggle] = useState(true);
 
-  const [arr, setArr] = useState([1,2,3,4,5,6])
+  const [arr] = useState([1, 2, 3, 4, 5, 6]);
 
   return (
     <>
       <Form name="geekbrains" />
       <hr />
-      <button onClick={() => setToggle(!toggle)}>{toggle ? 'hide' : 'show'}</button>
+      <button onClick={() => setToggle(!toggle)}>
+        {toggle ? 'hide' : 'show'}
+      </button>
       {toggle && <FormFunc name="javascript" />}
 
       <ul className={style.background}>
-        {arr.map(item => <li>{item}</li>)}
+        {arr.map((item, idx) => (
+          <li key={idx}>{item}</li>
+        ))}
       </ul>
     </>
   );
