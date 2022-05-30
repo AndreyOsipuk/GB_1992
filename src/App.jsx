@@ -1,17 +1,37 @@
-import { Form } from './components/classes/Form';
-import { Form as FormFunc } from './components/func/Form';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Form } from './components/Form';
+import { MessageList } from './components/MessagesList';
+import { AUTHOR } from './constants';
 
 export const App = () => {
-  const [toggle, setToggle] = useState(true);
+  const [messages, setMesseges] = useState([]);
+
+  const addMessage = (newMessage) => {
+    setMesseges([...messages, newMessage]);
+  };
+
+  useEffect(() => {
+    if (
+      messages.length > 0 &&
+      messages[messages.length - 1].author === AUTHOR.user
+    ) {
+      const timeout = setTimeout(() => {
+        addMessage({
+          author: AUTHOR.bot,
+          text: 'Im BOT',
+        });
+      }, 1000);
+
+      return () => {
+        clearTimeout(timeout);
+      };
+    }
+  }, [messages]);
 
   return (
     <>
-      <button onClick={() => setToggle(!toggle)}>toggle</button>
-      <hr />
-      <h3>{toggle ? 'func components' : 'class components'}</h3>
-      {!toggle && <Form />}
-      {toggle && <FormFunc />}
+      <MessageList messages={messages} />
+      <Form addMessage={addMessage} />
     </>
   );
 };
