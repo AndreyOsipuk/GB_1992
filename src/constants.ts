@@ -1,4 +1,6 @@
+import { Authors } from './common-types';
+
 export const AUTHOR = {
-  user: 'USER',
-  bot: 'BOT',
+  user: Authors.USER,
+  bot: Authors.BOT,
 };

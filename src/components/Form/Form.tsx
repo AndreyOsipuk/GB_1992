@@ -4,7 +4,7 @@ import { AUTHOR } from '../../constants';
 import { Button } from './components/Button';
 import style from './Form.module.scss';
 import { FC } from 'react';
-import { Message } from '../../common-types';
+import { Authors, Message } from '../../common-types';
 
 interface FormProps {
   addMessage: (msg: Message) => void;
