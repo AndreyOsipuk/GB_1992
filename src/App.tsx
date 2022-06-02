@@ -1,12 +1,14 @@
+import { FC } from 'react';
 import { useState, useEffect } from 'react';
 import { Form } from './components/Form';
 import { MessageList } from './components/MessagesList';
 import { AUTHOR } from './constants';
+import { Message } from './common-types';
 
-export const App = () => {
-  const [messages, setMesseges] = useState([]);
+export const App: FC = () => {
+  const [messages, setMesseges] = useState<Message[]>([]);
 
-  const addMessage = (newMessage) => {
+  const addMessage = (newMessage: Message) => {
     setMesseges([...messages, newMessage]);
   };
 
