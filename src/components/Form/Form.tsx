@@ -1,16 +1,16 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import { AUTHOR } from '../../constants';
 import { Button } from './components/Button';
 import style from './Form.module.scss';
 import { FC } from 'react';
-import { Authors, Message } from '../../common-types';
+import { Message } from '../../common-types';
 
 interface FormProps {
   addMessage: (msg: Message) => void;
 }
 
-export const Form: FC<FormProps> = ({ addMessage }) => {
+export const Form: FC<FormProps> = memo(({ addMessage }) => {
   const [text, setText] = useState('');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -22,10 +22,6 @@ export const Form: FC<FormProps> = ({ addMessage }) => {
     setText('');
   };
 
-  const handleClickButton = () => {
-    console.log('button click');
-  };
-
   return (
     <form onSubmit={handleSubmit} className={style.form}>
       <TextField
@@ -33,7 +29,7 @@ export const Form: FC<FormProps> = ({ addMessage }) => {
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
-      <Button label="send" click={handleClickButton} />
+      <Button render={() => <span>send</span>} />
     </form>
   );
-};
+});
