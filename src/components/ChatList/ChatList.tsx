@@ -7,9 +7,14 @@ import { Chat } from 'src/common-types';
 interface ChatListProps {
   chats: Chat[];
   onAddChat: (chat: Chat) => void;
+  onDeleteChat: (name: string) => void;
 }
 
-export const ChatList: FC<ChatListProps> = ({ chats, onAddChat }) => {
+export const ChatList: FC<ChatListProps> = ({
+  chats,
+  onAddChat,
+  onDeleteChat,
+}) => {
   const [value, setValue] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,6 +40,7 @@ export const ChatList: FC<ChatListProps> = ({ chats, onAddChat }) => {
         {chats.map((chat) => (
           <ListItem key={chat.id}>
             <Link to={`/chats/${chat.name}`}>{chat.name}</Link>
+            <button onClick={() => onDeleteChat(chat.name)}>X</button>
           </ListItem>
         ))}
       </ul>

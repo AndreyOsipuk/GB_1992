@@ -7,12 +7,16 @@ import { Message, Messages } from 'src/common-types';
 import { ChatList } from 'src/components/ChatList/ChatList';
 import { Chat } from 'src/common-types';
 import { Navigate, useParams } from 'react-router-dom';
+import { WithClasses } from 'src/HOC/WithClasses';
+
+import style from './ChatPage.module.css';
 
 interface ChatPageProps {
   chats: Chat[];
   onAddChat: (chat: Chat) => void;
   messages: Messages;
   onAddMessage: (id: string, msg: Message) => void;
+  onDeleteChat: (name: string) => void;
 }
 
 export const ChatPage: FC<ChatPageProps> = ({
@@ -20,8 +24,10 @@ export const ChatPage: FC<ChatPageProps> = ({
   onAddChat,
   messages,
   onAddMessage,
+  onDeleteChat,
 }) => {
   const { chatId } = useParams();
+  const MessageListWithClass = WithClasses(MessageList);
 
   useEffect(() => {
     if (
@@ -43,9 +49,9 @@ export const ChatPage: FC<ChatPageProps> = ({
   }, [chatId, messages]);
 
   const handleAddMessage = useCallback(
-    (mesasge: Message) => {
+    (message: Message) => {
       if (chatId) {
-        onAddMessage(chatId, mesasge);
+        onAddMessage(chatId, message);
       }
     },
     [chatId]
@@ -57,9 +63,17 @@ export const ChatPage: FC<ChatPageProps> = ({
 
   return (
     <>
-      <ChatList chats={chats} onAddChat={onAddChat} />
+      <ChatList
+        chats={chats}
+        onAddChat={onAddChat}
+        onDeleteChat={onDeleteChat}
+      />
 
-      <MessageList messages={chatId ? messages[chatId] : []} />
+      {/* <MessageList messages={chatId ? messages[chatId] : []} /> */}
+      <MessageListWithClass
+        messages={chatId ? messages[chatId] : []}
+        classes={style.border}
+      />
       <Form addMessage={handleAddMessage} />
     </>
   );
