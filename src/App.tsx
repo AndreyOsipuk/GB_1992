@@ -22,7 +22,7 @@ export const App: FC = () => {
           author: AUTHOR.bot,
           text: 'Im BOT',
         });
-      }, 1000);
+      }, 1500);
 
       return () => {
         clearTimeout(timeout);

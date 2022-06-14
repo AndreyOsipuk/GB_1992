@@ -22,9 +22,7 @@ export const Form: FC<FormProps> = ({ addMessage }) => {
     setText('');
   };
 
-  const handleClickButton = () => {
-    console.log('button click');
-  };
+  const handleClickButton = () => null;
 
   return (
     <form onSubmit={handleSubmit} className={style.form}>
@@ -32,6 +30,9 @@ export const Form: FC<FormProps> = ({ addMessage }) => {
         type="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
+        inputProps={{
+          'data-testid': 'input',
+        }}
       />
       <Button label="send" click={handleClickButton} />
     </form>

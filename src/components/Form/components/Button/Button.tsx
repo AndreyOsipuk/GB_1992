@@ -17,6 +17,7 @@ export const Button: FC<ButtonProps> = ({ label, disabled = false, click }) => {
       variant="contained"
       type="submit"
       onClick={click}
+      data-testid="button"
     >
       {label}
     </MUIButton>

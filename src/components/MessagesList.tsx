@@ -8,7 +8,7 @@ interface MessageListProps {
 export const MessageList: FC<MessageListProps> = ({ messages }) => (
   <ul>
     {messages.map((message, idx) => (
-      <li key={idx}>
+      <li key={idx} data-testid="li">
         {message.author}: {message.text}
       </li>
     ))}
