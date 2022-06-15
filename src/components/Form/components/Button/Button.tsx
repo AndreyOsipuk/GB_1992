@@ -21,6 +21,7 @@ export const Button: FC<ButtonProps> = ({
       variant="contained"
       type="submit"
       onClick={click}
+      data-testid="button"
     >
       {render && render()}
     </MUIButton>

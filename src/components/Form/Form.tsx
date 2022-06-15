@@ -28,6 +28,9 @@ export const Form: FC<FormProps> = memo(({ addMessage }) => {
         type="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
+        inputProps={{
+          'data-testid': 'input',
+        }}
       />
       <Button render={() => <span>send</span>} />
     </form>

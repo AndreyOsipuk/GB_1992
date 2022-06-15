@@ -6,7 +6,7 @@ import { AUTHOR } from 'src/constants';
 import { Message, Messages } from 'src/common-types';
 import { ChatList } from 'src/components/ChatList/ChatList';
 import { Chat } from 'src/common-types';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useParams, useLocation } from 'react-router-dom';
 
 interface ChatPageProps {
   chats: Chat[];
@@ -58,7 +58,6 @@ export const ChatPage: FC<ChatPageProps> = ({
   return (
     <>
       <ChatList chats={chats} onAddChat={onAddChat} />
-
       <MessageList messages={chatId ? messages[chatId] : []} />
       <Form addMessage={handleAddMessage} />
     </>
