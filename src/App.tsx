@@ -1,6 +1,5 @@
 import { Suspense } from 'react';
-import { nanoid } from 'nanoid';
-import { FC, useMemo, useState, useEffect } from 'react';
+import { FC, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ChatList } from './components/ChatList/ChatList';
 import { Header } from './components/Header';
@@ -9,8 +8,9 @@ import { Main } from './pages/Main';
 import { Profile } from './pages/Profile';
 import { defaultContext, ThemeContext } from './utils/ThemeContext';
 import { Provider } from 'react-redux';
-import { store } from './store';
+import { persistor, store } from './store';
 import { AboutWithConnect } from './pages/About';
+import { PersistGate } from 'redux-persist/integration/react';
 
 // const Profile = React.lazy(() =>
 //   Promise.all([
@@ -30,30 +30,32 @@ export const App: FC = () => {
 
   return (
     <Provider store={store}>
-      <Suspense fallback={<div>Loading...</div>}>
-        <ThemeContext.Provider
-          value={{
-            theme,
-            toggleTheme,
-          }}
-        >
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Header />}>
-                <Route index element={<Main />} />
-                <Route path="profile" element={<Profile />} />
-                <Route path="about" element={<AboutWithConnect />} />
-                <Route path="chats">
-                  <Route index element={<ChatList />} />
-                  <Route path=":chatId" element={<ChatPage />} />
+      <PersistGate persistor={persistor}>
+        <Suspense fallback={<div>Loading...</div>}>
+          <ThemeContext.Provider
+            value={{
+              theme,
+              toggleTheme,
+            }}
+          >
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Header />}>
+                  <Route index element={<Main />} />
+                  <Route path="profile" element={<Profile />} />
+                  <Route path="about" element={<AboutWithConnect />} />
+                  <Route path="chats">
+                    <Route index element={<ChatList />} />
+                    <Route path=":chatId" element={<ChatPage />} />
+                  </Route>
                 </Route>
-              </Route>
 
-              <Route path="*" element={<h2>404 page</h2>} />
-            </Routes>
-          </BrowserRouter>
-        </ThemeContext.Provider>
-      </Suspense>
+                <Route path="*" element={<h2>404 page</h2>} />
+              </Routes>
+            </BrowserRouter>
+          </ThemeContext.Provider>
+        </Suspense>
+      </PersistGate>
     </Provider>
   );
 };
