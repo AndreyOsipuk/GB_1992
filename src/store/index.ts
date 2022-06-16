@@ -23,7 +23,7 @@ const persistConfig = {
   blacklist: ['profile'],
 };
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   profile: profileReducer,
   messages: messageReducer,
 });

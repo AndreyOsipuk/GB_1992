@@ -4,7 +4,7 @@ import { Button } from './components/Button';
 import style from './Form.module.scss';
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
-import { addMessage, addMessageWithReply } from 'src/store/messages/actions';
+import { addMessageWithReply } from 'src/store/messages/actions';
 import { useParams } from 'react-router-dom';
 import { Authors } from 'src/common-types';
 import { ThunkDispatch } from 'redux-thunk';
@@ -30,6 +30,9 @@ export const Form: FC = memo(() => {
         type="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
+        inputProps={{
+          'data-testid': 'input',
+        }}
       />
       <Button render={() => <span>send</span>} />
     </form>
