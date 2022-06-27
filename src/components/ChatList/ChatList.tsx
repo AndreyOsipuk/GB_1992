@@ -8,7 +8,6 @@ import {
   messagesRef,
 } from 'src/services/firebase';
 
-
 interface ChatListProps {
   chats: any[];
   messagesDB: any;
