@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
-import { Authors, Message } from 'src/common-types';
+import { Authors } from 'src/common-types';
 import { AddMessage, MessageWithId } from './types';
 
 type MessagesState = Record<string, MessageWithId[]>;

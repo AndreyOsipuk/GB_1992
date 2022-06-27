@@ -11,7 +11,7 @@ export const PublicRoute: FC<PublicRouteProps> = ({ component }) => {
   const isAuth = useSelector(selectAuth);
 
   if (isAuth) {
-    return <Navigate to="/" replace />;
+    // return <Navigate to="/" replace />;
   }
 
   return component ? component : <Outlet />;

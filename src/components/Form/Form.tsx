@@ -9,6 +9,8 @@ import { useParams } from 'react-router-dom';
 import { Authors } from 'src/common-types';
 import { ThunkDispatch } from 'redux-thunk';
 import { AddMessage } from 'src/store/messages/types';
+import { push } from 'firebase/database';
+import { getMessageListById } from 'src/services/firebase';
 
 export const Form: FC = memo(() => {
   const [text, setText] = useState('');
@@ -19,12 +21,16 @@ export const Form: FC = memo(() => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (chatId) {
-      dispatch(
-        addMessageWithReply({
-          chatName: chatId,
-          message: { author: Authors.USER, text },
-        })
-      );
+      // dispatch(
+      //   addMessageWithReply({
+      //     chatName: chatId,
+      //     message: { author: Authors.USER, text },
+      //   })
+      // );
+      push(getMessageListById(chatId), {
+        text,
+        author: Authors.USER,
+      });
     }
 
     setText('');
